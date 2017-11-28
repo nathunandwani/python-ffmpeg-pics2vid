@@ -56,4 +56,10 @@ print "Resizing pictures to " + resolution
 os.system(mogrifypath + " -resize " + resolution + " " + folderpath + "temp/*.jpg")
 print "Converting to video..."
 os.system(ffmpegpath + " -f image2 -r " + str(rate) + " -i " + folderpath + "temp/" + "IMG_%06d.jpg" + " output_" + resolution + "_" + str(rate) + ".mp4")
-print "Generated video successfully!"    
+print "Generated video successfully!"   
+print "Clean up..."
+currentfiles = glob.glob(folderpath + "temp/*")
+for i in currentfiles:
+    os.remove(i)
+os.rmdir(folderpath + "temp/")
+print "Finished cleaning up"
